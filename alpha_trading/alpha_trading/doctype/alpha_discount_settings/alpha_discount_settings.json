@@ -1,0 +1,68 @@
+{
+ "actions": [],
+ "creation": "2026-10-13 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "default_price_list",
+  "low_margin_threshold",
+  "section_tiers",
+  "tiers"
+ ],
+ "fields": [
+  {
+   "description": "The price list new quotations start with.",
+   "fieldname": "default_price_list",
+   "fieldtype": "Link",
+   "label": "Default Price List",
+   "options": "Price List"
+  },
+  {
+   "default": "10",
+   "description": "Invoice items with a margin under this appear in Low Margin Invoices.",
+   "fieldname": "low_margin_threshold",
+   "fieldtype": "Percent",
+   "label": "Low Margin Threshold"
+  },
+  {
+   "fieldname": "section_tiers",
+   "fieldtype": "Section Break",
+   "label": "Volume Discounts"
+  },
+  {
+   "description": "A quantity at or above a tier's minimum gets that tier's discount.",
+   "fieldname": "tiers",
+   "fieldtype": "Table",
+   "label": "Discount Tiers",
+   "options": "Alpha Discount Tier"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-10-13 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Alpha Trading",
+ "name": "Alpha Discount Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Sales Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

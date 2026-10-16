@@ -8,10 +8,13 @@ from frappe.utils import flt
 
 
 def margin_percent(rate, buying_rate):
-	"""The share of the selling price that is margin, in percent; None without a buying rate."""
-	if not flt(buying_rate):
+	"""The share of the selling price that is margin, in percent; None without a buying or a selling rate.
+
+	Bought at 100 and sold at 125: 25 of the 125 is margin, 20%. (25 of the 100 cost, 25%, is the markup.)
+	"""
+	if not flt(buying_rate) or not flt(rate):
 		return None
-	return flt((flt(rate) - flt(buying_rate)) / flt(buying_rate) * 100, 2)
+	return flt((flt(rate) - flt(buying_rate)) / flt(rate) * 100, 2)
 
 
 def set_margins(doc, method=None):

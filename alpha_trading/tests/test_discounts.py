@@ -17,6 +17,8 @@ class TestVolumeDiscount(FrappeTestCase):
 
 	def test_between_two_tiers_the_lower_one_applies(self):
 		self.assertEqual(tier_for(20, TIERS), 5)
+	def test_at_a_tier_minimum_the_tier_applies(self):
+		self.assertEqual(tier_for(50, TIERS), 10)
 
 	def test_above_the_top_tier_the_top_discount_applies(self):
 		self.assertEqual(tier_for(120, TIERS), 10)

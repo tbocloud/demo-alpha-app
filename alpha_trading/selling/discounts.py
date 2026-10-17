@@ -22,7 +22,7 @@ def tier_for(qty, discount_tiers) -> float:
 	"""The discount of the highest tier the quantity reaches; 0 below the first tier."""
 	discount = 0.0
 	for tier in sorted(discount_tiers, key=lambda tier: flt(tier["min_qty"])):
-		if flt(qty) > flt(tier["min_qty"]):
+		if flt(qty) >= flt(tier["min_qty"]):
 			discount = flt(tier["discount_percent"])
 	return discount
 

@@ -26,8 +26,11 @@ def set_margins(doc, method=None):
 
 
 def validate_margin_on_submit(doc, method=None):
-	"""Sales Invoice before_submit: check that invoice items meet the minimum margin threshold."""
+	"""Sales Invoice before_submit: verify margin requirements before submitting."""
+	settings = frappe.get_doc("Alpha Discount Settings")
+	min_margin = settings.get_minimum_margin()
 	for item in doc.items:
-		if item.margin_percent < doc.min_margin:
-			frappe.throw(frappe._("Margin is below the required minimum."))
+		if flt(item.margin_percent) < min_margin:
+			frappe.throw(frappe._("Item margin is below the minimum required threshold."))
+
 

@@ -12,9 +12,6 @@ required_apps = ["erpnext"]
 after_install = "alpha_trading.install.after_install"
 after_migrate = "alpha_trading.install.after_install"
 
-doctype_js = {
-	"Sales Invoice": "public/js/sales_invoice.js",
-}
 
 doc_events = {
 	"Sales Invoice": {

@@ -12,12 +12,18 @@ required_apps = ["erpnext"]
 after_install = "alpha_trading.install.after_install"
 after_migrate = "alpha_trading.install.after_install"
 
+doctype_js = {
+	"Sales Invoice": "public/js/sales_invoice.js",
+}
+
 doc_events = {
 	"Sales Invoice": {
 		"validate": "alpha_trading.accounts.margin.set_margins",
+		"before_submit": "alpha_trading.accounts.margin.validate_margin_on_submit",
 	},
 	"Quotation": {
 		"before_insert": "alpha_trading.selling.discounts.set_default_price_list",
 		"validate": "alpha_trading.selling.discounts.apply_tier_discounts",
 	},
 }
+

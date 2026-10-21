@@ -23,3 +23,11 @@ def set_margins(doc, method=None):
 		if not flt(item.get("buying_rate")) and item.item_code:
 			item.buying_rate = flt(frappe.db.get_value("Item", item.item_code, "valuation_rate"))
 		item.margin_percent = margin_percent(item.rate, item.get("buying_rate"))
+
+
+def validate_margin_on_submit(doc, method=None):
+	"""Sales Invoice before_submit: check that invoice items meet the minimum margin threshold."""
+	for item in doc.items:
+		if item.margin_percent < doc.min_margin:
+			frappe.throw(frappe._("Margin is below the required minimum."))
+

@@ -13,7 +13,8 @@ concurrency:
 jobs:
   tests:
     name: Server tests
-    runs-on: ubuntu-latest
+    # pinned: ubuntu-latest moved to Ubuntu 26 (19 Oct 2026), whose MariaDB client insists on TLS
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
 
     services:
@@ -54,8 +55,8 @@ jobs:
         run: |
           pip install frappe-bench
           bench init --skip-redis-config-generation --skip-assets --frappe-branch version-15 --python "$(which python)" ~/frappe-bench
-          mariadb --host 127.0.0.1 --port 3306 -u root -proot -e "SET GLOBAL character_set_server = 'utf8mb4'"
-          mariadb --host 127.0.0.1 --port 3306 -u root -proot -e "SET GLOBAL collation_server = 'utf8mb4_unicode_ci'"
+          mariadb --host 127.0.0.1 --port 3306 -u root -proot --skip-ssl -e "SET GLOBAL character_set_server = 'utf8mb4'"
+          mariadb --host 127.0.0.1 --port 3306 -u root -proot --skip-ssl -e "SET GLOBAL collation_server = 'utf8mb4_unicode_ci'"
 
       - name: Install apps
         working-directory: /home/runner/frappe-bench

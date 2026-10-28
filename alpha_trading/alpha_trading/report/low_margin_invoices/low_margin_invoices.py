@@ -11,7 +11,7 @@ from frappe.utils import flt
 def execute(filters=None):
 	filters = filters or {}
 	threshold = flt(frappe.db.get_single_value("Alpha Discount Settings", "low_margin_threshold")) or 10
-	conditions = {"docstatus": 1, "margin_percent": ["<", threshold]}
+	conditions = {"docstatus": 1, "margin_percent": [">", threshold]}
 	if filters.get("customer"):
 		invoices = frappe.get_all("Sales Invoice", filters={"customer": filters["customer"]}, pluck="name")
 		conditions["parent"] = ["in", invoices or [""]]
